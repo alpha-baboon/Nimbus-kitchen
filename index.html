@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nimbus Kitchen – Delivery-only food, cooked fresh</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#eef3f1;--surface:#fff;--ink:#12302a;--muted:#4d6560;--pine:#12302a;--sun:#f2b705;--chili:#d6402b;--line:#cfdcd7;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1f1b;--surface:#14302a;--ink:#eaf3f0;--muted:#9bb5ae;--pine:#eaf3f0;--line:#264540;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0c1f1b;--surface:#14302a;--ink:#eaf3f0;--muted:#9bb5ae;--pine:#eaf3f0;--line:#264540;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 "DM Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque","DM Sans",system-ui,sans-serif;line-height:1.05;margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.logo{font:800 24px "Bricolage Grotesque",sans-serif;text-decoration:none}
+.logo span{color:var(--chili)}
+.cartlink{background:var(--ink);color:var(--bg);border-radius:999px;padding:8px 16px;font-weight:700;text-decoration:none}
+.hero{padding:36px 0 56px}
+.hero h1{font-size:clamp(46px,10vw,104px);font-weight:800;letter-spacing:-.03em;max-width:11ch}
+.hero p{max-width:46ch;color:var(--muted);font-size:19px;margin:20px 0 28px}
+.btn{display:inline-block;border:0;border-radius:12px;background:var(--sun);color:#12302a;font:700 17px "DM Sans",sans-serif;padding:14px 24px;cursor:pointer;text-decoration:none}
+.btn:hover{filter:brightness(.95)}
+.track{display:flex;gap:0;margin-top:44px;border:2px solid var(--ink);border-radius:16px;overflow:hidden;background:var(--surface)}
+.track div{flex:1;padding:14px 16px;border-right:2px solid var(--ink)}
+.track div:last-child{border-right:0}
+.track b{display:block;font:800 26px "Bricolage Grotesque",sans-serif}
+.track small{color:var(--muted)}
+section{padding:48px 0}
+h2{font-size:clamp(32px,6vw,52px);font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+.sub{color:var(--muted);max-width:56ch;margin:0 0 24px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.tab{border:2px solid var(--ink);background:transparent;color:var(--ink);border-radius:999px;padding:8px 18px;font:700 15px "DM Sans",sans-serif;cursor:pointer}
+.tab[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.menu{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:8px}
+.item .dot{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:24px;background:var(--bg)}
+.item h3{font-size:22px}
+.item p{margin:0;color:var(--muted);font-size:15px;flex:1}
+.row{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.price{font:800 22px "Bricolage Grotesque",sans-serif}
+.add{border:2px solid var(--ink);background:transparent;color:var(--ink);border-radius:10px;padding:6px 16px;font:700 15px "DM Sans",sans-serif;cursor:pointer}
+.add:hover{background:var(--sun);border-color:var(--sun);color:#12302a}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px}
+.how h3{font-size:22px;margin-bottom:6px}
+.how p{margin:0;color:var(--muted)}
+.order{display:grid;grid-template-columns:1.2fr 1fr;gap:28px}
+@media(max-width:760px){.order{grid-template-columns:1fr}.track{flex-direction:column}.track div{border-right:0;border-bottom:2px solid var(--ink)}.track div:last-child{border-bottom:0}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px}
+.panel h3{font-size:24px;margin-bottom:12px}
+.line{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.qty button{width:28px;height:28px;border-radius:8px;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;font-weight:700}
+.qty span{display:inline-block;min-width:24px;text-align:center}
+.total{display:flex;justify-content:space-between;font:800 24px "Bricolage Grotesque",sans-serif;margin-top:14px}
+label{display:block;font-weight:700;font-size:15px;margin:12px 0 4px}
+input,textarea{width:100%;border:1px solid var(--ink);border-radius:10px;padding:11px 12px;font:400 16px "DM Sans",sans-serif;background:var(--bg);color:var(--ink)}
+.empty{color:var(--muted)}
+#done{display:none;background:var(--sun);color:#12302a;border-radius:14px;padding:16px;margin-top:16px;font-weight:700}
+footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);font-size:15px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <a class="logo" href="#top">Nimbus<span>.</span>Kitchen</a>
+  <a class="cartlink" href="#order">Cart (<span id="count">0</span>)</a>
+</header>
+
+<main id="top">
+<div class="hero">
+  <h1>Hot food, no dining room.</h1>
+  <p>Nimbus Kitchen cooks only for delivery. Three kitchens share one roof, so your bowl, grill and dessert leave together and arrive hot.</p>
+  <a class="btn" href="#menu">See the menu</a>
+  <div class="track" aria-label="Delivery facts">
+    <div><b>30 min</b><small>Average door-to-door time</small></div>
+    <div><b>3 kitchens</b><small>One order, one rider</small></div>
+    <div><b>11am–1am</b><small>Open every day</small></div>
+  </div>
+</div>
+
+<section id="menu">
+  <h2>Pick a kitchen</h2>
+  <p class="sub">Mix dishes from all three kitchens in a single order.</p>
+  <div class="tabs" id="tabs"></div>
+  <div class="menu" id="menuGrid"></div>
+</section>
+
+<section id="how">
+  <h2>How an order works</h2>
+  <div class="how">
+    <div><h3>You order</h3><p>Choose dishes, enter your address and place the order. No app to install.</p></div>
+    <div><h3>We cook</h3><p>Each kitchen starts your dishes when the order arrives, not before.</p></div>
+    <div><h3>A rider delivers</h3><p>Sealed, insulated bags go straight to your door in about half an hour.</p></div>
+  </div>
+</section>
+
+<section id="order">
+  <h2>Your order</h2>
+  <div class="order">
+    <div class="panel">
+      <h3>Cart</h3>
+      <div id="cart"></div>
+      <div class="total"><span>Total</span><span id="total">$0.00</span></div>
+    </div>
+    <div class="panel">
+      <h3>Delivery details</h3>
+      <div id="formBox">
+        <label for="name">Name</label><input id="name" autocomplete="name">
+        <label for="phone">Phone</label><input id="phone" type="tel" autocomplete="tel">
+        <label for="addr">Delivery address</label><textarea id="addr" rows="3" autocomplete="street-address"></textarea>
+        <p style="margin:16px 0 0"><button class="btn" id="place" type="button">Place order</button></p>
+        <p id="err" style="color:var(--chili);font-weight:700;margin:10px 0 0"></p>
+      </div>
+      <div id="done" role="status"></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div>Nimbus Kitchen · Delivery only · hello@nimbuskitchen.example</div>
+  <div>This is a demo storefront: orders are not sent anywhere and no payment is taken.</div>
+</footer>
+</div>
+
+<script>
+var KITCHENS=["All","Bowl Bar","Smoke & Spice","Sweet Shelf"];
+var ITEMS=[
+{id:1,k:"Bowl Bar",n:"Harissa chicken bowl",d:"Roast chicken, herbed rice, charred peppers, yoghurt drizzle.",p:11.5,e:"🍚"},
+{id:2,k:"Bowl Bar",n:"Miso mushroom bowl",d:"Seared mushrooms, sesame greens, soft egg, brown rice.",p:10.5,e:"🍄"},
+{id:3,k:"Bowl Bar",n:"Chickpea crunch bowl",d:"Spiced chickpeas, cucumber, pickled onion, tahini.",p:9.5,e:"🥗"},
+{id:4,k:"Smoke & Spice",n:"Smoked paneer tikka",d:"Charcoal-grilled paneer, mint chutney, laccha onions.",p:12,e:"🍢"},
+{id:5,k:"Smoke & Spice",n:"Sticky ribs, half rack",d:"Slow-cooked pork ribs glazed with chili honey.",p:15.5,e:"🍖"},
+{id:6,k:"Smoke & Spice",n:"Fire-grilled wings",d:"Six wings with your choice of smoky BBQ or lemon pepper.",p:10,e:"🍗"},
+{id:7,k:"Sweet Shelf",n:"Brown butter cookie box",d:"Four cookies baked to order, sea salt on top.",p:8,e:"🍪"},
+{id:8,k:"Sweet Shelf",n:"Mango cardamom pot",d:"Chilled mango cream with cardamom crumble.",p:6.5,e:"🥭"},
+{id:9,k:"Sweet Shelf",n:"Molten chocolate cake",d:"Warm centre, served with salted caramel.",p:7.5,e:"🍫"}];
+var cart={},active="All";
+var $=function(i){return document.getElementById(i)};
+var money=function(n){return "$"+n.toFixed(2)};
+
+function renderTabs(){
+  $("tabs").innerHTML=KITCHENS.map(function(k){
+    return '<button class="tab" aria-pressed="'+(k===active)+'" data-k="'+k+'">'+k+'</button>'}).join("");
+  Array.prototype.forEach.call(document.querySelectorAll(".tab"),function(b){
+    b.onclick=function(){active=b.getAttribute("data-k");renderTabs();renderMenu()}});
+}
+function renderMenu(){
+  $("menuGrid").innerHTML=ITEMS.filter(function(i){return active==="All"||i.k===active}).map(function(i){
+    return '<article class="item"><div class="dot" aria-hidden="true">'+i.e+'</div><h3>'+i.n+'</h3><p>'+i.d+'</p>'+
+    '<div class="row"><span class="price">'+money(i.p)+'</span><button class="add" data-id="'+i.id+'">Add</button></div></article>'}).join("");
+  Array.prototype.forEach.call(document.querySelectorAll(".add"),function(b){
+    b.onclick=function(){change(+b.getAttribute("data-id"),1)}});
+}
+function change(id,d){
+  cart[id]=(cart[id]||0)+d;
+  if(cart[id]<=0)delete cart[id];
+  $("done").style.display="none";$("formBox").style.display="block";
+  renderCart();
+}
+function renderCart(){
+  var ids=Object.keys(cart),total=0,count=0,html="";
+  ids.forEach(function(id){
+    var it=ITEMS.filter(function(x){return x.id==id})[0],q=cart[id];
+    total+=it.p*q;count+=q;
+    html+='<div class="line"><span>'+it.n+'</span><span class="qty"><button aria-label="Remove one '+it.n+'" data-id="'+id+'" data-d="-1">−</button><span>'+q+'</span><button aria-label="Add one '+it.n+'" data-id="'+id+'" data-d="1">+</button></span></div>'});
+  $("cart").innerHTML=html||'<p class="empty">Your cart is empty. Add dishes from the menu above.</p>';
+  $("total").textContent=money(total);$("count").textContent=count;
+  Array.prototype.forEach.call(document.querySelectorAll(".qty button"),function(b){
+    b.onclick=function(){change(+b.getAttribute("data-id"),+b.getAttribute("data-d"))}});
+}
+$("place").onclick=function(){
+  var n=$("name").value.trim(),p=$("phone").value.trim(),a=$("addr").value.trim();
+  if(!Object.keys(cart).length){$("err").textContent="Add at least one dish to your cart.";return}
+  if(!n||!p||!a){$("err").textContent="Enter your name, phone and delivery address.";return}
+  $("err").textContent="";
+  $("formBox").style.display="none";
+  $("done").style.display="block";
+  $("done").textContent="Order placed, "+n+". Your food is on its way in about 30 minutes. (Demo only: nothing was sent.)";
+  cart={};renderCart();
+};
+renderTabs();renderMenu();renderCart();
+</script>
+</body>
+</html>
