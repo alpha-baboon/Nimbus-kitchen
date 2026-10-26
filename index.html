@@ -51,7 +51,11 @@ h2 small{font:600 15px "Hind",sans-serif;color:var(--muted);letter-spacing:.12em
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tab[aria-pressed="true"]{color:#2d1111}}
 .menu{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
 .item{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
-.pic{height:160px;background:var(--tint);display:grid;place-items:center}
+.pic{height:210px;background:var(--tint);display:block;overflow:hidden;position:relative}
+.pic img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .35s ease}
+.item:hover .pic img{transform:scale(1.045)}
+@media(max-width:600px){.pic{height:220px}.menu{grid-template-columns:repeat(auto-fill,minmax(min(100%,245px),1fr));gap:14px}}
+@media(prefers-reduced-motion:reduce){.pic img{transition:none}.item:hover .pic img{transform:none}}
 .pic svg{width:140px;height:140px}
 .pic img{width:100%;height:100%;object-fit:cover}
 .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
@@ -182,7 +186,7 @@ var WHATSAPP="919766974350";/* kitchen WhatsApp number with country code, e.g. "
 var ORDER_ENDPOINT="";  /* Google Apps Script web app URL that saves orders to a sheet */
 
 var CATS=["सर्व · All","बिर्याणी","शोरमा","तंदुरी / ग्रिल","रस्सा / फ्राय"];
-/* Add a real photo to any dish: put the file in an images folder and set img:"images/name.jpg" */
+/* Real food photography is used for every menu item. Photos are hosted on Unsplash. */
 var ITEMS=[
 {id:1,c:1,n:"Chicken Dum Biryani",mr:"चिकन दम बिर्याणी",d:"Basmati rice and chicken slow-cooked together on dum, with fried onions.",p:220,img:"https://images.unsplash.com/photo-1563379091339-03246963d96c?auto=format&fit=crop&w=900&q=80"},
 {id:2,c:1,n:"Mutton Biryani",mr:"मटण बिर्याणी",d:"Tender mutton pieces layered with saffron rice and whole spices.",p:320,img:"https://images.unsplash.com/photo-1633945274405-b6c3b8d6b0cd?auto=format&fit=crop&w=900&q=80"},
@@ -208,7 +212,7 @@ function renderTabs(){
 }
 function renderMenu(){
   $("menuGrid").innerHTML=ITEMS.filter(function(i){return active===0||i.c===active}).map(function(i){
-    var pic='<img src="'+(i.img||"https://images.unsplash.com/photo-1563379091339-03246963d96c?auto=format&fit=crop&w=900&q=80")+'" alt="'+esc(i.n)+'" loading="lazy">;
+    var pic='<img src="'+(i.img||"https://images.unsplash.com/photo-1563379091339-03246963d96c?auto=format&fit=crop&w=900&q=80")+'" alt="'+esc(i.n)+'" loading="lazy" decoding="async">';
     return '<article class="item"><div class="pic">'+pic+'</div><div class="body"><h3>'+i.n+'</h3><div class="mr">'+i.mr+'</div><p>'+i.d+'</p><div class="row"><span class="price">'+rs(i.p)+'</span><button class="add" data-id="'+i.id+'">जोडा · Add</button></div></div></article>'}).join("");
   Array.prototype.forEach.call(document.querySelectorAll(".add"),function(b){b.onclick=function(){change(+b.getAttribute("data-id"),1)}});
 }
